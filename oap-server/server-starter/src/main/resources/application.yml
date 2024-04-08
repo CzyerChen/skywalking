@@ -137,7 +137,7 @@ core:
     # The max number of HTTP URIs per service for further URI pattern recognition.
     maxHttpUrisNumberPerService: ${SW_CORE_MAX_HTTP_URIS_NUMBER_PER_SVR:3000}
 storage:
-  selector: ${SW_STORAGE:h2}
+  selector: ${SW_STORAGE:postgresql}
   elasticsearch:
     namespace: ${SW_NAMESPACE:""}
     clusterNodes: ${SW_STORAGE_ES_CLUSTER_NODES:localhost:9200}
@@ -201,9 +201,9 @@ storage:
     asyncBatchPersistentPoolSize: ${SW_STORAGE_ASYNC_BATCH_PERSISTENT_POOL_SIZE:4}
   postgresql:
     properties:
-      jdbcUrl: ${SW_JDBC_URL:"jdbc:postgresql://localhost:5432/skywalking"}
+      jdbcUrl: ${SW_JDBC_URL:"jdbc:postgresql://localhost:15432/skywalking"}
       dataSource.user: ${SW_DATA_SOURCE_USER:postgres}
-      dataSource.password: ${SW_DATA_SOURCE_PASSWORD:123456}
+      dataSource.password: ${SW_DATA_SOURCE_PASSWORD:password}
       dataSource.cachePrepStmts: ${SW_DATA_SOURCE_CACHE_PREP_STMTS:true}
       dataSource.prepStmtCacheSize: ${SW_DATA_SOURCE_PREP_STMT_CACHE_SQL_SIZE:250}
       dataSource.prepStmtCacheSqlLimit: ${SW_DATA_SOURCE_PREP_STMT_CACHE_SQL_LIMIT:2048}
@@ -353,7 +353,7 @@ receiver-otel:
   selector: ${SW_OTEL_RECEIVER:default}
   default:
     enabledHandlers: ${SW_OTEL_RECEIVER_ENABLED_HANDLERS:"otlp-metrics,otlp-logs"}
-    enabledOtelMetricsRules: ${SW_OTEL_RECEIVER_ENABLED_OTEL_METRICS_RULES:"apisix,nginx/*,k8s/*,istio-controlplane,vm,mysql/*,postgresql/*,oap,aws-eks/*,windows,aws-s3/*,aws-dynamodb/*,aws-gateway/*,redis/*,elasticsearch/*,rabbitmq/*,mongodb/*,kafka/*,pulsar/*,bookkeeper/*,rocketmq/*,clickhouse/*"}
+    enabledOtelMetricsRules: ${SW_OTEL_RECEIVER_ENABLED_OTEL_METRICS_RULES:"apisix,nginx/*,k8s/*,istio-controlplane,vm,mysql/*,postgresql/*,oap,aws-eks/*,windows,aws-s3/*,aws-dynamodb/*,aws-gateway/*,redis/*,elasticsearch/*,rabbitmq/*,mongodb/*,kafka/*,pulsar/*,bookkeeper/*,rocketmq/*,clickhouse/*,activemq/*"}
 
 receiver-zipkin:
   selector: ${SW_RECEIVER_ZIPKIN:-}
@@ -405,7 +405,7 @@ query:
     # abort a query if the total number of data fields queried exceeds the defined threshold.
     maxQueryComplexity: ${SW_QUERY_MAX_QUERY_COMPLEXITY:3000}
     # Allow user add, disable and update UI template
-    enableUpdateUITemplate: ${SW_ENABLE_UPDATE_UI_TEMPLATE:false}
+    enableUpdateUITemplate: ${SW_ENABLE_UPDATE_UI_TEMPLATE:true}
     # "On demand log" allows users to fetch Pod containers' log in real time,
     # because this might expose secrets in the logs (if any), users need
     # to enable this manually, and add permissions to OAP cluster role.
