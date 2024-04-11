@@ -15,12 +15,7 @@
 
 {{- contains . }}
 - id: {{ notEmpty .id }}
-  name: amq1exporter
-  instanceuuid: {{ notEmpty .instanceuuid }}
-  attributes: []
-  language: UNKNOWN
-- id: {{ notEmpty .id }}
-  name: amq2exporter
+  name: activemq-broker
   instanceuuid: {{ notEmpty .instanceuuid }}
   attributes: []
   language: UNKNOWN

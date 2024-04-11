@@ -20,9 +20,9 @@ receivers:
         - job_name: "activemq-monitoring"
           scrape_interval: 30s
           static_configs:
-            - targets: ['amq1-exporter:5556','amq2-exporter:5556']
+            - targets: ['amq1exporter:5556','amq2exporter:5556']
               labels:
-                cluster: activemq-cluster
+                cluster: activemq-broker
 
 exporters:
   otlp:

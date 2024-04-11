@@ -27,7 +27,6 @@ services:
 
   amq1:
     image: apache/activemq-classic:6.0.1
-    container_name: amq1
     hostname: amq1
     ports:
       - "61616:61616"
@@ -39,9 +38,9 @@ services:
       - ./storage:/opt/apache-activemq/data/kahadb
     environment:
       ACTIVEMQ_SUNJMX_START: "-Dcom.sun.management.jmxremote.port=1616 -Dcom.sun.management.jmxremote.rmi.port=1616 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-      ACTIVEMQ_BROKER_NAME: activemq-cluster
+      ACTIVEMQ_BROKER_NAME: activemq-broker
     healthcheck:
-      test: [ "CMD", "nc", "-nz", "127.0.0.1", "61616" ]
+      test: [ "CMD-SHELL", "curl --silent --fail localhost:8161 || exit 1" ]
       interval: 15s
       timeout: 10s
       retries: 120
@@ -50,11 +49,7 @@ services:
 
   amq2:
     image: apache/activemq-classic:6.0.1
-    container_name: amq2
     hostname: amq2
-    ports:
-      - "61617:61616"
-      - "8162:8161"
     expose:
       - 1616
     volumes:
@@ -62,21 +57,15 @@ services:
       - ./storage:/opt/apache-activemq/data/kahadb
     environment:
       ACTIVEMQ_SUNJMX_START: "-Dcom.sun.management.jmxremote.port=1616 -Dcom.sun.management.jmxremote.rmi.port=1616 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
-      ACTIVEMQ_BROKER_NAME: activemq-cluster
+      ACTIVEMQ_BROKER_NAME: activemq-broker
     depends_on:
       - amq1
-    healthcheck:
-      test: [ "CMD", "nc", "-nz", "127.0.0.1", "61616" ]
-      interval: 15s
-      timeout: 10s
-      retries: 120
     networks:
       - e2e
 
-  amq1-exporter:
+  amq1exporter:
     image: bitnami/jmx-exporter:0.20.0
-    container_name: amq1-exporter
-    hostname: amq1-exporter
+    hostname: amq1exporter
     volumes:
       - ./config/amq1/config.yaml:/opt/bitnami/jmx-exporter/example_configs/httpserver_sample_config.yml
     expose:
@@ -86,10 +75,9 @@ services:
     networks:
       - e2e
 
-  amq2-exporter:
+  amq2exporter:
     image: bitnami/jmx-exporter:0.20.0
-    container_name: amq2-exporter
-    hostname: amq2-exporter
+    hostname: amq2exporter
     volumes:
       - ./config/amq2/config.yaml:/opt/bitnami/jmx-exporter/example_configs/httpserver_sample_config.yml
     expose:
@@ -107,8 +95,6 @@ services:
       - "/opt/apache-activemq/bin/activemq consumer --brokerUrl tcp://amq1:61616 --destination queue://testQueue --messageCount 10 --parallelThreads 2 && /opt/apache-activemq/bin/activemq consumer --broker-url tcp://amq1:61616 --destination topic://testTopic --messageCount 10 --parallelThreads 2"
     depends_on:
       amq1:
-        condition: service_healthy
-      amq2:
         condition: service_healthy
     networks:
       - e2e

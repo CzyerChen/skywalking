@@ -55,49 +55,49 @@ cases:
   # instance cases
   - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql instance ls --service-name=activemq::activemq-cluster
     expected: expected/instance.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_uptime  --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_uptime  --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_state --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_state --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_connentions --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_connentions --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_producer_count --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_producer_count --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_consumer_count --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_current_consumer_count --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_producer_count  --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_producer_count  --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_consumer_count --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_consumer_count --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_enqueue_count --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_enqueue_count --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml    
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_dequeue_count --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_dequeue_count --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_enqueue_rate --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_enqueue_rate --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_dequeue_rate --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_dequeue_rate --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_percent_usage  --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_percent_usage  --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-labele.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_percent_usage --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_percent_usage --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_limit --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_memory_limit --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_percent_usage --service-name=activemq::activemq-cluster --instance-name=amq1exporter    
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_percent_usage --service-name=activemq::activemq-cluster --instance-name=activemq-broker    
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_limit --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_limit --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_temp_percent_usage --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_temp_percent_usage --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_percent_usage --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_store_percent_usage --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_temp_limit --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_temp_limit --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_average_message_size --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_average_message_size --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_max_message_size --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_max_message_size --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml 
-  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_queue_size --service-name=activemq::activemq-cluster --instance-name=amq1exporter
+  - query: swctl --display yaml --base-url=http://${oap_host}:${oap_12800}/graphql metrics exec --expression=meter_activemq_broker_queue_size --service-name=activemq::activemq-cluster --instance-name=activemq-broker
     expected: expected/metrics-has-value-label.yml
 
   # endpoint cases
