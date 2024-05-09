@@ -32,7 +32,7 @@ public class TextParserSpec extends AbstractParserSpec {
 
     @SuppressWarnings("unused")
     public void regexp(final String regexp) {
-        regexp(Pattern.compile(regexp));
+        regexp(Pattern.compile(regexp, dotAll() ? Pattern.DOTALL : 0));
     }
 
     public void regexp(final Pattern pattern) {

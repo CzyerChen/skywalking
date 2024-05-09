@@ -14,11 +14,61 @@
 # limitations under the License.
 
 # The default LAL script to save all logs, behaving like the versions before 8.5.0.
+#rules:
+#  - name: default
+#    layer: GENERAL
+#    dsl: |
+#      filter {
+#        sink {
+#        }
+#      }
 rules:
-  - name: default
+  - name: log_count_rule
     layer: GENERAL
     dsl: |
       filter {
+        text {
+          abortOnFailure true
+          dotAll false
+          regexp $/(?s)(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}) \[TID:(?<tid>.+?)] \[(?<thread>.+?)] (?<level>\w{4,}) (?<logger>.{1,36}) (?<msg>.+)/$
+        }
+        extractor {
+          metrics {
+            timestamp log.timestamp as Long
+            labels level: parsed.level, service: log.service, instance: log.serviceInstance, timestamp: log.timestamp
+            name "log_count"
+            value 1
+          }
+        }
+        sink {
+          if (parsed.level == "INFO") {
+            enforcer { }
+          }
+          if (parsed.level == "ERROR") {
+            enforcer { }
+          }
+          if (parsed.level == "WARN") {
+            enforcer { }
+          }
+        }
+      }
+  - name: log_exception_rule
+    layer: GENERAL
+    dsl: |
+      filter {
+        text {
+          abortOnFailure true
+          dotAll true
+          regexp $/(?s)(?<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}) \[TID:(?<tid>.+?)] \[(?<thread>.+?)] (?<level>\w{4,}) (?<logger>.{1,36}) (?<msg>.+)(?<exception>(?:.*?)(?<=\.)\w+Exception(?=:)?\s*([\s\S]*?)?) (?<stacktrace>.+)/$
+        }
+        extractor {
+          metrics {
+            timestamp log.timestamp as Long
+            labels level: parsed.level, exception: parsed.exception, service: log.service, instance: log.serviceInstance, timestamp: log.timestamp
+            name "log_exception"
+            value 1
+          }
+        }
         sink {
         }
       }

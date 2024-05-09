@@ -33,6 +33,8 @@ public class AbstractParserSpec extends AbstractSpec {
      */
     private boolean abortOnFailure = true;
 
+    private boolean dotAll = false;
+
     public AbstractParserSpec(final ModuleManager moduleManager,
                               final LogAnalyzerModuleConfig moduleConfig) {
         super(moduleManager, moduleConfig);
@@ -45,5 +47,14 @@ public class AbstractParserSpec extends AbstractSpec {
 
     public boolean abortOnFailure() {
         return this.abortOnFailure;
+    }
+
+    public boolean dotAll() {
+        return this.dotAll;
+    }
+
+    @SuppressWarnings("unused")
+    public void dotAll(final boolean dotAll) {
+        this.dotAll = dotAll;
     }
 }

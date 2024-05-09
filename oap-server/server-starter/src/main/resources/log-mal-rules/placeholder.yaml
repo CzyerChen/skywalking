@@ -14,3 +14,14 @@
 # limitations under the License.
 
 # Refer to examples in config-examples/log-mal.yaml
+expSuffix: instance(['service'], ['instance'], Layer.GENERAL)
+metricPrefix: log
+metricsRules:
+  - name: count_info
+    exp: log_count.tagEqual('level', 'INFO').sum(['service', 'instance']).downsampling(SUM)
+  - name: count_warn
+    exp: log_count.tagEqual('level', 'WARN').sum(['service', 'instance']).downsampling(SUM)
+  - name: count_error
+    exp: log_count.tagEqual('level', 'ERROR').sum(['service', 'instance']).downsampling(SUM)
+  - name: exception_info
+    exp: log_exception.tagEqual('level', 'ERROR').sum(['service', 'instance','exception']).downsampling(SUM)

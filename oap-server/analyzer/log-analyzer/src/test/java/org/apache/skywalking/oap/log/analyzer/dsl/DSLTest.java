@@ -187,7 +187,23 @@ public class DSLTest {
                         "    timestamp \"2023-11-01 22:10:10\", \"yyyy-MM-dd HH:mm:ss\"\n" +
                         "  }\n" +
                         "}",
-                }
+                },
+                new String[] {
+                    "textparser-dotall",
+                    "filter {\n" +
+                        "  json {\n" +
+                        "    abortOnFailure false // for test purpose, we want to persist all logs\n" +
+                        "    dotAll true // for test purpose, we want to persist all logs\n" +
+                        "  }\n" +
+                        "  text {\n" +
+                        "    abortOnFailure false // for test purpose, we want to persist all logs\n" +
+                        "    regexp $/(?s)(?<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}.\\d{3}) \\[TID:(?<tid>.+?)] \\[(?<thread>.+?)] (?<level>\\w{4,}) (?<logger>.{1,36}) (?<msg>.+)/$" +
+                        "  }\n" +
+                        "  yaml {\n" +
+                        "    abortOnFailure false // for test purpose, we want to persist all logs\n" +
+                        "  }" +
+                        "}",
+                    }
         );
     }
 
